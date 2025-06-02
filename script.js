@@ -165,8 +165,25 @@ class ContactForm {
     constructor() {
         this.form = document.getElementById('contactForm');
         this.messageDiv = document.getElementById('formMessage');
+        this.submitBtn = this.form?.querySelector('.submit-btn');
+        this.originalBtnText = this.submitBtn?.textContent;
         
+        // EmailJS configuration
+        this.emailJSConfig = {
+            serviceID: 'service_alnilam', // You'll need to create this in EmailJS
+            templateID: 'template_contact', // You'll need to create this in EmailJS
+            publicKey: 'YOUR_EMAILJS_PUBLIC_KEY' // You'll need to get this from EmailJS
+        };
+        
+        this.initEmailJS();
         this.init();
+    }
+
+    initEmailJS() {
+        // Initialize EmailJS with public key
+        if (typeof emailjs !== 'undefined') {
+            emailjs.init(this.emailJSConfig.publicKey);
+        }
     }
 
     init() {
@@ -182,11 +199,15 @@ class ContactForm {
                 input.addEventListener('blur', () => {
                     this.validateField(input);
                 });
+
+                input.addEventListener('input', () => {
+                    this.clearFieldError(input);
+                });
             });
         }
     }
 
-    handleSubmit() {
+    async handleSubmit() {
         const formData = new FormData(this.form);
         const data = Object.fromEntries(formData);
 
@@ -195,92 +216,235 @@ class ContactForm {
             return;
         }
 
-        // Simulate form submission
-        this.showMessage('Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.', 'success');
-        this.form.reset();
+        // Show loading state
+        this.setLoadingState(true);
 
-        // In a real application, you would send the data to your server:
-        // this.submitToServer(data);
+        try {
+            // Send email via EmailJS
+            await this.sendEmailJS(data);
+            
+            // Success message
+            this.showMessage('✅ Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.', 'success');
+            this.form.reset();
+            this.clearAllFieldStyles();
+            
+            console.log('Email sent successfully:', data);
+            
+        } catch (error) {
+            console.error('Email sending failed:', error);
+            
+            // Fallback to mailto if EmailJS fails
+            this.showMessage('📧 Email gönderiminde sorun oldu. Alternatif olarak direkt email linkini açıyoruz...', 'error');
+            this.openMailtoLink(data);
+            
+        } finally {
+            this.setLoadingState(false);
+        }
+    }
+
+    async sendEmailJS(data) {
+        if (typeof emailjs === 'undefined') {
+            throw new Error('EmailJS not loaded');
+        }
+
+        // Template parameters for EmailJS
+        const templateParams = {
+            from_name: data.name,
+            from_email: data.email,
+            phone: data.phone,
+            message: data.message,
+            to_email: 'info@alnilamturizm.com',
+            subject: 'Alnilam Turizm - Yeni İletişim Formu Mesajı',
+            reply_to: data.email
+        };
+
+        try {
+            const response = await emailjs.send(
+                this.emailJSConfig.serviceID,
+                this.emailJSConfig.templateID,
+                templateParams
+            );
+            
+            if (response.status === 200) {
+                return response;
+            } else {
+                throw new Error('EmailJS response error');
+            }
+        } catch (error) {
+            // If EmailJS is not configured, use fallback
+            if (error.message.includes('not found') || error.message.includes('YOUR_EMAILJS')) {
+                throw new Error('EmailJS not configured - using fallback');
+            }
+            throw error;
+        }
+    }
+
+    openMailtoLink(data) {
+        // Create mailto link as fallback
+        const subject = encodeURIComponent('Alnilam Turizm - İletişim Formu');
+        const body = encodeURIComponent(`
+Gönderen: ${data.name}
+Email: ${data.email}
+Telefon: ${data.phone}
+
+Mesaj:
+${data.message}
+
+---
+Bu mesaj alnilamturizm.com iletişim formundan gönderilmiştir.
+        `);
+        
+        const mailtoLink = `mailto:info@alnilamturizm.com?subject=${subject}&body=${body}`;
+        
+        // Open default email client
+        window.location.href = mailtoLink;
+        
+        // Show instructions
+        setTimeout(() => {
+            this.showMessage('📬 Email istemciniz açıldı. Eğer açılmadıysa, lütfen direkt info@alnilamturizm.com adresine email gönderin.', 'success');
+        }, 2000);
+    }
+
+    async simulateSubmission(data) {
+        // Keep as backup - simulate network delay
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (Math.random() > 0.05) {
+                    resolve(data);
+                } else {
+                    reject(new Error('Simulated network error'));
+                }
+            }, 1500);
+        });
     }
 
     validateForm(data) {
         const requiredFields = ['name', 'email', 'phone', 'message'];
         let isValid = true;
 
-        requiredFields.forEach(field => {
+        // Check required fields
+        for (const field of requiredFields) {
             if (!data[field] || data[field].trim() === '') {
-                this.showMessage('Lütfen tüm alanları doldurun.', 'error');
-                isValid = false;
-                return;
+                this.showMessage('⚠️ Lütfen tüm alanları doldurun.', 'error');
+                this.highlightEmptyFields();
+                return false;
             }
-        });
+        }
 
         // Email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(data.email)) {
-            this.showMessage('Lütfen geçerli bir email adresi girin.', 'error');
-            isValid = false;
+            this.showMessage('⚠️ Lütfen geçerli bir email adresi girin.', 'error');
+            this.highlightField('email', false);
+            return false;
         }
 
-        // Phone validation (Turkish phone number format)
-        const phoneRegex = /^(\+90|0)?[1-9]\d{2}\s?\d{3}\s?\d{2}\s?\d{2}$/;
-        if (!phoneRegex.test(data.phone.replace(/\s/g, ''))) {
-            this.showMessage('Lütfen geçerli bir telefon numarası girin.', 'error');
-            isValid = false;
+        // Enhanced phone validation (Turkish phone number format)
+        const phoneRegex = /^(\+90|0)?[1-9]\d{2}[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}$/;
+        const cleanPhone = data.phone.replace(/[\s-]/g, '');
+        if (!phoneRegex.test(data.phone) || cleanPhone.length < 10) {
+            this.showMessage('⚠️ Lütfen geçerli bir telefon numarası girin. (Örnek: 0532 123 45 67)', 'error');
+            this.highlightField('phone', false);
+            return false;
         }
 
-        return isValid;
+        // Message length validation
+        if (data.message.length < 10) {
+            this.showMessage('⚠️ Lütfen en az 10 karakter uzunluğunda mesaj yazın.', 'error');
+            this.highlightField('message', false);
+            return false;
+        }
+
+        return true;
     }
 
     validateField(field) {
         const value = field.value.trim();
         
         if (field.hasAttribute('required') && !value) {
-            field.style.borderColor = '#ef4444';
+            this.highlightField(field.name, false);
             return false;
         }
 
         if (field.type === 'email' && value) {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(value)) {
-                field.style.borderColor = '#ef4444';
+                this.highlightField(field.name, false);
                 return false;
             }
         }
 
-        field.style.borderColor = '#10b981';
+        if (field.type === 'tel' && value) {
+            const phoneRegex = /^(\+90|0)?[1-9]\d{2}[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}$/;
+            if (!phoneRegex.test(value)) {
+                this.highlightField(field.name, false);
+                return false;
+            }
+        }
+
+        this.highlightField(field.name, true);
         return true;
     }
 
+    highlightField(fieldName, isValid) {
+        const field = this.form.querySelector(`[name="${fieldName}"]`);
+        if (field) {
+            field.style.borderColor = isValid ? '#10b981' : '#ef4444';
+            field.style.boxShadow = isValid ? 
+                '0 0 0 3px rgba(16, 185, 129, 0.1)' : 
+                '0 0 0 3px rgba(239, 68, 68, 0.1)';
+        }
+    }
+
+    clearFieldError(field) {
+        field.style.borderColor = '#e5e7eb';
+        field.style.boxShadow = 'none';
+    }
+
+    highlightEmptyFields() {
+        const requiredFields = ['name', 'email', 'phone', 'message'];
+        requiredFields.forEach(fieldName => {
+            const field = this.form.querySelector(`[name="${fieldName}"]`);
+            if (field && !field.value.trim()) {
+                this.highlightField(fieldName, false);
+            }
+        });
+    }
+
+    clearAllFieldStyles() {
+        const inputs = this.form.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            this.clearFieldError(input);
+        });
+    }
+
+    setLoadingState(isLoading) {
+        if (!this.submitBtn) return;
+
+        if (isLoading) {
+            this.submitBtn.disabled = true;
+            this.submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gönderiliyor...';
+            this.submitBtn.style.opacity = '0.7';
+        } else {
+            this.submitBtn.disabled = false;
+            this.submitBtn.textContent = this.originalBtnText;
+            this.submitBtn.style.opacity = '1';
+        }
+    }
+
     showMessage(message, type) {
-        this.messageDiv.textContent = message;
+        this.messageDiv.innerHTML = message;
         this.messageDiv.className = `form-message ${type}`;
         this.messageDiv.style.display = 'block';
 
+        // Auto hide after 8 seconds for success, 10 seconds for error
+        const hideDelay = type === 'success' ? 8000 : 10000;
         setTimeout(() => {
             this.messageDiv.style.display = 'none';
-        }, 5000);
-    }
+        }, hideDelay);
 
-    async submitToServer(data) {
-        try {
-            const response = await fetch('/api/contact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            });
-
-            if (response.ok) {
-                this.showMessage('Mesajınız başarıyla gönderildi!', 'success');
-                this.form.reset();
-            } else {
-                throw new Error('Server error');
-            }
-        } catch (error) {
-            this.showMessage('Bir hata oluştu. Lütfen tekrar deneyin.', 'error');
-        }
+        // Scroll to message if not visible
+        this.messageDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 }
 
