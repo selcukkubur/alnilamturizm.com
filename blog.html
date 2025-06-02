@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-tr="Blog - Alnilam Turizm" data-en="Blog - Alnilam Tourism">Blog - Alnilam Turizm</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <img src="images/logo.svg" alt="Alnilam Turizm" class="logo">
+                </div>
+                
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link" data-tr="Ana Sayfa" data-en="Home">Ana Sayfa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#about" class="nav-link" data-tr="Hakkımızda" data-en="About Us">Hakkımızda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#destinations" class="nav-link" data-tr="Destinasyonlar" data-en="Destinations">Destinasyonlar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#services" class="nav-link" data-tr="Hizmetler" data-en="Services">Hizmetler</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#contact" class="nav-link" data-tr="İletişim" data-en="Contact">İletişim</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="blog.html" class="nav-link active" data-tr="Blog" data-en="Blog">Blog</a>
+                    </li>
+                </ul>
+
+                <div class="nav-controls">
+                    <div class="language-switcher">
+                        <button class="lang-btn active" data-lang="tr">TR</button>
+                        <button class="lang-btn" data-lang="en">EN</button>
+                    </div>
+                    <div class="hamburger">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Blog Hero -->
+    <section class="blog-hero">
+        <div class="container">
+            <h1 data-tr="Seyahat Blog" data-en="Travel Blog">Seyahat Blog</h1>
+            <p data-tr="Türkiye'nin en güzel yerlerini keşfedin, seyahat ipuçları alın" data-en="Discover Turkey's most beautiful places, get travel tips">Türkiye'nin en güzel yerlerini keşfedin, seyahat ipuçları alın</p>
+        </div>
+    </section>
+
+    <!-- Blog Content -->
+    <section class="blog-page-content">
+        <div class="container">
+            <div class="blog-page-grid">
+                <!-- Blog Posts Container -->
+                <div class="blog-posts-container">
+                    <!-- Featured Article -->
+                    <article class="blog-post featured">
+                        <div class="post-image">
+                            <img src="images/blog/blog1.jpg" alt="Kapadokya">
+                            <span class="post-category" data-tr="Destinasyon" data-en="Destination">Destinasyon</span>
+                        </div>
+                        <div class="post-content">
+                            <h2 data-tr="Kapadokya: Peri Bacaları ve Sıcak Hava Balonları Rehberi" data-en="Cappadocia: Fairy Chimneys and Hot Air Balloons Guide">Kapadokya: Peri Bacaları ve Sıcak Hava Balonları Rehberi</h2>
+                            <div class="post-meta">
+                                <span><i class="fas fa-calendar"></i> 15 Ocak 2024</span>
+                                <span><i class="fas fa-user"></i> Mehmet Öz</span>
+                                <span><i class="fas fa-clock"></i> 8 dk okuma</span>
+                            </div>
+                            <p data-tr="Kapadokya, eşsiz jeolojik yapıları ve büyüleyici manzaralarıyla dünyanın en özel yerlerinden biri. Peri bacaları, yeraltı şehirleri ve unutulmaz sıcak hava balonu deneyimi..." data-en="Cappadocia is one of the world's most special places with its unique geological formations and mesmerizing landscapes. Fairy chimneys, underground cities and unforgettable hot air balloon experience...">Kapadokya, eşsiz jeolojik yapıları ve büyüleyici manzaralarıyla dünyanın en özel yerlerinden biri. Peri bacaları, yeraltı şehirleri ve unutulmaz sıcak hava balonu deneyimi...</p>
+                            <a href="#" class="read-more" data-tr="Devamını Oku" data-en="Read More">Devamını Oku</a>
+                        </div>
+                    </article>
+
+                    <!-- Regular Blog Posts -->
+                    <div class="posts-grid">
+                        <article class="blog-post">
+                            <div class="post-image">
+                                <img src="images/blog/blog2.jpg" alt="İstanbul">
+                                <span class="post-category" data-tr="Şehir Rehberi" data-en="City Guide">Şehir Rehberi</span>
+                            </div>
+                            <div class="post-content">
+                                <h3 data-tr="İstanbul'da 3 Gün: Mükemmel Gezi Rotası" data-en="3 Days in Istanbul: Perfect Travel Route">İstanbul'da 3 Gün: Mükemmel Gezi Rotası</h3>
+                                <div class="post-meta">
+                                    <span><i class="fas fa-calendar"></i> 12 Ocak 2024</span>
+                                    <span><i class="fas fa-clock"></i> 6 dk</span>
+                                </div>
+                                <p data-tr="İstanbul'un tarihi yarımadasından Boğaz'a, Sultanahmet'ten Galata'ya kadar şehrin en güzel yerlerini keşfedin." data-en="Discover the city's most beautiful places from Istanbul's historic peninsula to the Bosphorus, from Sultanahmet to Galata.">İstanbul'un tarihi yarımadasından Boğaz'a, Sultanahmet'ten Galata'ya kadar şehrin en güzel yerlerini keşfedin.</p>
+                                <a href="#" class="read-more" data-tr="Devamını Oku" data-en="Read More">Devamını Oku</a>
+                            </div>
+                        </article>
+
+                        <article class="blog-post">
+                            <div class="post-image">
+                                <img src="images/destinations/pamukkale.jpg" alt="Pamukkale">
+                                <span class="post-category" data-tr="Doğa" data-en="Nature">Doğa</span>
+                            </div>
+                            <div class="post-content">
+                                <h3 data-tr="Pamukkale: Beyaz Cennetin Sırları" data-en="Pamukkale: Secrets of White Paradise">Pamukkale: Beyaz Cennetin Sırları</h3>
+                                <div class="post-meta">
+                                    <span><i class="fas fa-calendar"></i> 10 Ocak 2024</span>
+                                    <span><i class="fas fa-clock"></i> 5 dk</span>
+                                </div>
+                                <p data-tr="Pamukkale'nin ünlü beyaz travertenleri ve antik Hierapolis şehri hakkında bilmeniz gereken her şey." data-en="Everything you need to know about Pamukkale's famous white travertines and the ancient city of Hierapolis.">Pamukkale'nin ünlü beyaz travertenleri ve antik Hierapolis şehri hakkında bilmeniz gereken her şey.</p>
+                                <a href="#" class="read-more" data-tr="Devamını Oku" data-en="Read More">Devamını Oku</a>
+                            </div>
+                        </article>
+
+                        <article class="blog-post">
+                            <div class="post-image">
+                                <img src="images/destinations/antalya.jpg" alt="Antalya">
+                                <span class="post-category" data-tr="Plaj" data-en="Beach">Plaj</span>
+                            </div>
+                            <div class="post-content">
+                                <h3 data-tr="Antalya'nın En Güzel Plajları" data-en="Antalya's Most Beautiful Beaches">Antalya'nın En Güzel Plajları</h3>
+                                <div class="post-meta">
+                                    <span><i class="fas fa-calendar"></i> 8 Ocak 2024</span>
+                                    <span><i class="fas fa-clock"></i> 4 dk</span>
+                                </div>
+                                <p data-tr="Türkiye'nin riviera kıyılarında yer alan en güzel plajlar ve sahil kasabalarını keşfedin." data-en="Discover the most beautiful beaches and coastal towns on Turkey's riviera coast.">Türkiye'nin riviera kıyılarında yer alan en güzel plajlar ve sahil kasabalarını keşfedin.</p>
+                                <a href="#" class="read-more" data-tr="Devamını Oku" data-en="Read More">Devamını Oku</a>
+                            </div>
+                        </article>
+
+                        <article class="blog-post">
+                            <div class="post-image">
+                                <img src="images/blog/blog3.jpg" alt="Seyahat İpuçları">
+                                <span class="post-category" data-tr="İpuçları" data-en="Tips">İpuçları</span>
+                            </div>
+                            <div class="post-content">
+                                <h3 data-tr="Türkiye'de Seyahat İpuçları: Bilmeniz Gerekenler" data-en="Travel Tips in Turkey: What You Need to Know">Türkiye'de Seyahat İpuçları: Bilmeniz Gerekenler</h3>
+                                <div class="post-meta">
+                                    <span><i class="fas fa-calendar"></i> 5 Ocak 2024</span>
+                                    <span><i class="fas fa-clock"></i> 7 dk</span>
+                                </div>
+                                <p data-tr="Türkiye'de unutulmaz bir tatil geçirmek için pratik ipuçları, kültürel bilgiler ve öneriler." data-en="Practical tips, cultural information and recommendations for an unforgettable vacation in Turkey.">Türkiye'de unutulmaz bir tatil geçirmek için pratik ipuçları, kültürel bilgiler ve öneriler.</p>
+                                <a href="#" class="read-more" data-tr="Devamını Oku" data-en="Read More">Devamını Oku</a>
+                            </div>
+                        </article>
+
+                        <article class="blog-post">
+                            <div class="post-image">
+                                <img src="images/destinations/cappadocia.jpg" alt="Nevşehir">
+                                <span class="post-category" data-tr="Kültür" data-en="Culture">Kültür</span>
+                            </div>
+                            <div class="post-content">
+                                <h3 data-tr="Nevşehir'in Gizli Cenneti: Yerel Yaşam" data-en="Nevşehir's Hidden Paradise: Local Life">Nevşehir'in Gizli Cenneti: Yerel Yaşam</h3>
+                                <div class="post-meta">
+                                    <span><i class="fas fa-calendar"></i> 3 Ocak 2024</span>
+                                    <span><i class="fas fa-clock"></i> 6 dk</span>
+                                </div>
+                                <p data-tr="Turistik yerlerden uzak, Nevşehir'in yerel yaşamını deneyimleyebileceğiniz özel yerler ve aktiviteler." data-en="Special places and activities where you can experience Nevşehir's local life away from tourist spots.">Turistik yerlerden uzak, Nevşehir'in yerel yaşamını deneyimleyebileceğiniz özel yerler ve aktiviteler.</p>
+                                <a href="#" class="read-more" data-tr="Devamını Oku" data-en="Read More">Devamını Oku</a>
+                            </div>
+                        </article>
+
+                        <article class="blog-post">
+                            <div class="post-image">
+                                <img src="images/gallery/gallery6.jpg" alt="Türk Mutfağı">
+                                <span class="post-category" data-tr="Yemek" data-en="Food">Yemek</span>
+                            </div>
+                            <div class="post-content">
+                                <h3 data-tr="Türk Mutfağının En Lezzetli Durağı" data-en="The Most Delicious Stop of Turkish Cuisine">Türk Mutfağının En Lezzetli Durağı</h3>
+                                <div class="post-meta">
+                                    <span><i class="fas fa-calendar"></i> 1 Ocak 2024</span>
+                                    <span><i class="fas fa-clock"></i> 5 dk</span>
+                                </div>
+                                <p data-tr="Türkiye'nin farklı bölgelerinden en meşhur yemekler ve bunları tadabileceğiniz en iyi lokantalar." data-en="The most famous dishes from different regions of Turkey and the best restaurants where you can taste them.">Türkiye'nin farklı bölgelerinden en meşhur yemekler ve bunları tadabileceğiniz en iyi lokantalar.</p>
+                                <a href="#" class="read-more" data-tr="Devamını Oku" data-en="Read More">Devamını Oku</a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="blog-sidebar">
+                    <!-- Search Widget -->
+                    <div class="sidebar-widget">
+                        <h3 data-tr="Blog Ara" data-en="Search Blog">Blog Ara</h3>
+                        <div class="search-form">
+                            <input type="text" placeholder="Arama..." data-tr-placeholder="Arama..." data-en-placeholder="Search...">
+                            <button><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Categories Widget -->
+                    <div class="sidebar-widget">
+                        <h3 data-tr="Kategoriler" data-en="Categories">Kategoriler</h3>
+                        <ul class="categories-list">
+                            <li><a href="#" data-tr="Destinasyonlar" data-en="Destinations">Destinasyonlar <span>(12)</span></a></li>
+                            <li><a href="#" data-tr="Seyahat İpuçları" data-en="Travel Tips">Seyahat İpuçları <span>(8)</span></a></li>
+                            <li><a href="#" data-tr="Kültür" data-en="Culture">Kültür <span>(6)</span></a></li>
+                            <li><a href="#" data-tr="Yemek" data-en="Food">Yemek <span>(5)</span></a></li>
+                            <li><a href="#" data-tr="Doğa" data-en="Nature">Doğa <span>(4)</span></a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Recent Posts Widget -->
+                    <div class="sidebar-widget">
+                        <h3 data-tr="Son Yazılar" data-en="Recent Posts">Son Yazılar</h3>
+                        <div class="recent-posts">
+                            <div class="recent-post">
+                                <img src="images/blog/blog1.jpg" alt="Kapadokya">
+                                <div class="recent-post-content">
+                                    <h4 data-tr="Kapadokya Rehberi" data-en="Cappadocia Guide">Kapadokya Rehberi</h4>
+                                    <span>15 Ocak 2024</span>
+                                </div>
+                            </div>
+                            <div class="recent-post">
+                                <img src="images/blog/blog2.jpg" alt="İstanbul">
+                                <div class="recent-post-content">
+                                    <h4 data-tr="İstanbul'da 3 Gün" data-en="3 Days in Istanbul">İstanbul'da 3 Gün</h4>
+                                    <span>12 Ocak 2024</span>
+                                </div>
+                            </div>
+                            <div class="recent-post">
+                                <img src="images/destinations/pamukkale.jpg" alt="Pamukkale">
+                                <div class="recent-post-content">
+                                    <h4 data-tr="Pamukkale Sırları" data-en="Pamukkale Secrets">Pamukkale Sırları</h4>
+                                    <span>10 Ocak 2024</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Newsletter Widget -->
+                    <div class="sidebar-widget newsletter-widget">
+                        <h3 data-tr="Bültene Abone Ol" data-en="Subscribe Newsletter">Bültene Abone Ol</h3>
+                        <p data-tr="Yeni yazılarımızı kaçırmayın!" data-en="Don't miss our new posts!">Yeni yazılarımızı kaçırmayın!</p>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="E-posta adresiniz" data-tr-placeholder="E-posta adresiniz" data-en-placeholder="Your email address">
+                            <button type="submit" data-tr="Abone Ol" data-en="Subscribe">Abone Ol</button>
+                        </form>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="images/logo.svg" alt="Alnilam Turizm">
+                        <span>Alnilam Turizm</span>
+                    </div>
+                    <p data-tr="Türkiye'nin en güzel yerlerini keşfetmeniz için buradayız." data-en="We are here for you to discover the most beautiful places in Turkey.">Türkiye'nin en güzel yerlerini keşfetmeniz için buradayız.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3 data-tr="Hızlı Linkler" data-en="Quick Links">Hızlı Linkler</h3>
+                    <ul>
+                        <li><a href="index.html" data-tr="Ana Sayfa" data-en="Home">Ana Sayfa</a></li>
+                        <li><a href="index.html#about" data-tr="Hakkımızda" data-en="About">Hakkımızda</a></li>
+                        <li><a href="index.html#destinations" data-tr="Turlar" data-en="Tours">Turlar</a></li>
+                        <li><a href="blog.html" data-tr="Blog" data-en="Blog">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 data-tr="İletişim" data-en="Contact">İletişim</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> <span data-tr="Veysel Karani mah., Sancaktepe/İstanbul" data-en="Veysel Karani neighborhood, Sancaktepe/Istanbul">Veysel Karani mah., Sancaktepe/İstanbul</span></p>
+                        <p><i class="fas fa-phone"></i> +90 216 999 03 69</p>
+                        <p><i class="fas fa-envelope"></i> info@alnilamturizm.com</p>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3 data-tr="Bülten" data-en="Newsletter">Bülten</h3>
+                    <p data-tr="Özel fırsatları kaçırmayın!" data-en="Don't miss special offers!">Özel fırsatları kaçırmayın!</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="E-posta adresiniz">
+                        <button type="submit" data-tr="Abone Ol" data-en="Subscribe">Abone Ol</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Alnilam Turizm. <span data-tr="Tüm hakları saklıdır." data-en="All rights reserved.">Tüm hakları saklıdır.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html> 
