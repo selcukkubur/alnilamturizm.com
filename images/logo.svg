@@ -1,5 +1,5 @@
 <svg viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="auto" style="max-width:400px;">
-  <rect width="1920" height="1080" fill="white"/>
+  <rect width="1920" height="1080" fill="#F3F3F3"/>
   <!-- YILDIZ -->
   <g>
     <polygon points="960,305 975,352 1025,352 985,380 1000,426 960,395 920,426 935,380 895,352 945,352" fill="black"/>
