@@ -1,26 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="200" height="90" viewBox="0 0 200 90">
-  <!-- Star with shadow effect -->
-  <g transform="translate(100, 18)">
-    <!-- Shadow -->
-    <path d="M2,-14 L7.5,-3.5 L16,-3.5 L9.5,3.5 L12,14 L2,8 L-8,14 L-5.5,3.5 L-16,-3.5 L-7.5,-3.5 Z" fill="rgba(0,0,0,0.1)"/>
-    <!-- Main star -->
-    <path d="M0,-15 L6,-4 L15,-4 L8,4 L10,15 L0,9 L-10,15 L-8,4 L-15,-4 L-6,-4 Z" fill="#1e3a8a" stroke="#06b6d4" stroke-width="1"/>
-    <!-- Inner highlight -->
-    <path d="M0,-10 L4,-2 L10,-2 L5,2 L7,10 L0,6 L-7,10 L-5,2 L-10,-2 L-4,-2 Z" fill="rgba(255,255,255,0.3)"/>
-    
-    <!-- Enhanced motion lines -->
-    <g opacity="0.9">
-      <path d="M18,-8 L26,-5 M18,-3 L25,0 M18,2 L24,5 M18,7 L25,10" stroke="#06b6d4" stroke-width="2" stroke-linecap="round"/>
-      <path d="M-26,-5 L-18,-8 M-25,0 L-18,-3 M-24,5 L-18,2 M-25,10 L-18,7" stroke="#06b6d4" stroke-width="2" stroke-linecap="round"/>
-    </g>
+<svg viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="auto" style="max-width:400px;">
+  <rect width="1920" height="1080" fill="white"/>
+  <!-- YILDIZ -->
+  <g>
+    <polygon points="960,305 975,352 1025,352 985,380 1000,426 960,395 920,426 935,380 895,352 945,352" fill="black"/>
+    <path d="M960,305 l14,35 c22,-5 50,-17 70,-32 -22,11 -49,20 -70,17z" fill="black"/>
+    <path d="M960,305 l19,40 c23,-2 54,-18 80,-38 -29,14 -55,23 -80,18z" fill="black"/>
   </g>
-  
-  <!-- ALNILAM text - bigger and bolder -->
-  <text x="100" y="55" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="900" fill="#1e3a8a" letter-spacing="1px">ALNILAM</text>
-  
-  <!-- TURİZM text - bigger -->
-  <text x="100" y="75" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#4b5563" letter-spacing="2px">TURİZM</text>
-  
-  <!-- Decorative underline -->
-  <line x1="40" y1="80" x2="160" y2="80" stroke="#06b6d4" stroke-width="2" opacity="0.6"/>
-</svg> 
+  <!-- ALNILAM -->
+  <g>
+    <text x="960" y="600" text-anchor="middle" font-family="serif" font-size="200" font-weight="bold" fill="black" letter-spacing="32">ALNILAM</text>
+  </g>
+  <!-- TURİZM -->
+  <g>
+    <text x="960" y="720" text-anchor="middle" font-family="serif" font-size="100" font-weight="normal" fill="black" letter-spacing="12">TURİZM</text>
+  </g>
+</svg>
