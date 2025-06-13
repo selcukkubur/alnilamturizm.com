@@ -62,7 +62,7 @@ body {
 }
 
 .logo {
-    height: 65px;
+    height: 150px;
     width: auto;
     object-fit: contain;
     transition: var(--transition);
