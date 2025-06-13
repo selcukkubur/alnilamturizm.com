@@ -1,135 +1,512 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Alnilam Turizm | Hayalindeki Tatil Burada</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body { margin: 0; font-family: 'Roboto', Arial, sans-serif; background: #f7f7f7; color: #222; }
-    header { background: #fff; box-shadow: 0 2px 8px #eee; padding: 18px 0 10px 0; text-align: center; }
-    header h1 { color: #e53935; margin: 0 0 8px 0; font-size: 2.3rem; letter-spacing: 2px; }
-    nav { margin: 12px 0 0 0; }
-    nav a { text-decoration: none; color: #e53935; margin: 0 14px; font-weight: 700; transition: color 0.2s; }
-    nav a:hover { color: #222; }
-    .banner {
-      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
-      height: 240px;
-      display: flex; align-items: center; justify-content: center;
-      color: #fff; font-size: 2.1rem; font-weight: bold;
-      letter-spacing: 1px; text-shadow: 1px 2px 6px #444;
-      margin-bottom: 0;
-    }
-    .search-box {
-      max-width: 520px; margin: -45px auto 28px auto;
-      background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #ddd;
-      padding: 20px 28px 12px 28px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
-    }
-    .search-box input, .search-box select {
-      padding: 9px; border-radius: 4px; border: 1px solid #ccc; margin-right: 12px; flex: 1 0 120px;
-    }
-    .search-box button {
-      background: #e53935; color: #fff; border: none; padding: 11px 22px; border-radius: 4px;
-      font-weight: bold; cursor: pointer; transition: background 0.2s;
-    }
-    .search-box button:hover { background: #b71c1c; }
-    .cards {
-      display: flex; flex-wrap: wrap; max-width: 950px; margin: 0 auto 44px auto;
-      gap: 24px; justify-content: center;
-    }
-    .card {
-      background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #eee;
-      width: 270px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s;
-    }
-    .card:hover { transform: translateY(-6px) scale(1.03); }
-    .card img { width: 100%; height: 140px; object-fit: cover; }
-    .card-body { padding: 17px 13px 15px 13px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
-    .card-title { font-size: 1.15rem; font-weight: bold; color: #e53935; margin-bottom: 8px; }
-    .card-desc { font-size: 1rem; color: #555; margin-bottom: 12px; }
-    .card button {
-      background: #e53935; color: #fff; border: none; padding: 9px 0;
-      border-radius: 4px; font-weight: bold; cursor: pointer; width: 100%; transition: background 0.2s;
-    }
-    .card button:hover { background: #b71c1c; }
-    .contact-bar {
-      background: #e53935; color: #fff; text-align: center; padding: 17px 0;
-      font-size: 1.1rem; font-weight: 500;
-      letter-spacing: 1px; margin-bottom: 0;
-    }
-    footer {
-      background: #222; color: #eee; text-align: center; padding: 22px 0 12px 0; font-size: 0.99rem;
-    }
-    @media (max-width: 700px) {
-      .cards { flex-direction: column; align-items: center; }
-      .card { width: 94%; }
-      .banner { font-size: 1.1rem; height: 120px; }
-      .search-box { padding: 10px 8px 8px 8px; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alnilam Turizm - Türkiye'nin En İyi Tur Rehberi</title>
+    <meta name="description" content="Alnilam Turizm ile Türkiye'nin en güzel yerlerini keşfedin. Profesyonel tur hizmetleri ve unutulmaz deneyimler.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- EmailJS CDN for contact form -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
+    <!-- Preload hero images for faster loading -->
+    <link rel="preload" href="images/cappadocia.jpg" as="image" type="image/jpeg">
+    <link rel="preload" href="images/pamukkale.jpg" as="image" type="image/jpeg">
+    <link rel="preload" href="images/istanbul.jpg" as="image" type="image/jpeg">
 </head>
 <body>
-  <header>
-    <h1>Alnilam Turizm</h1>
-    <nav>
-      <a href="#">Anasayfa</a>
-      <a href="#">Turlar</a>
-      <a href="#">Oteller</a>
-      <a href="#">Kampanyalar</a>
-      <a href="#">İletişim</a>
-    </nav>
-  </header>
-  <div class="banner">
-    Hayalindeki Tatile Bir Adım Daha Yakınsın!
-  </div>
-  <form class="search-box">
-    <input type="text" placeholder="Şehir veya Otel Ara" />
-    <select>
-      <option>Tatil Türü</option>
-      <option>Yurtiçi Turlar</option>
-      <option>Yurtdışı Turlar</option>
-      <option>Kıbrıs Turları</option>
-      <option>Oteller</option>
-    </select>
-    <input type="date" />
-    <button type="submit">Ara</button>
-  </form>
-  <section class="cards">
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=700&q=80" alt="Yurtdışı Turları">
-      <div class="card-body">
-        <div>
-          <div class="card-title">Yurtdışı Turları</div>
-          <div class="card-desc">2025 erken rezervasyon fırsatlarıyla Avrupa'nın gözde şehirlerini keşfet!</div>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="https://alnilamturizm.com">
+  <img src="images/logo.svg" alt="Alnilam Turizm" class="logo">
+</a>
+                </div>
+                
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link" data-tr="Ana Sayfa" data-en="Home">Ana Sayfa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link" data-tr="Hakkımızda" data-en="About Us">Hakkımızda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#destinations" class="nav-link" data-tr="Destinasyonlar" data-en="Destinations">Destinasyonlar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#services" class="nav-link" data-tr="Hizmetler" data-en="Services">Hizmetler</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link" data-tr="İletişim" data-en="Contact">İletişim</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#blog" class="nav-link" data-tr="Blog" data-en="Blog">Blog</a>
+                    </li>
+                </ul>
+
+                <div class="nav-controls">
+                    <div class="language-switcher">
+                        <button class="lang-btn active" data-lang="tr">TR</button>
+                        <button class="lang-btn" data-lang="en">EN</button>
+                    </div>
+                    <div class="hamburger">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title" data-tr="Türkiye'nin En Güzel Yerlerini Keşfedin" data-en="Discover Turkey's Most Beautiful Places">
+                Türkiye'nin En Güzel Yerlerini Keşfedin
+            </h1>
+            <p class="hero-subtitle" data-tr="Profesyonel rehberlik ve unutulmaz deneyimlerle dolu tur paketlerimiz" data-en="Tour packages full of professional guidance and unforgettable experiences">
+                Profesyonel rehberlik ve unutulmaz deneyimlerle dolu tur paketlerimiz
+            </p>
+            <button class="cta-button" data-tr="Turları Keşfet" data-en="Explore Tours">
+                Turları Keşfet
+            </button>
         </div>
-        <button>İncele</button>
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=700&q=80" alt="Kıbrıs Otelleri">
-      <div class="card-body">
-        <div>
-          <div class="card-title">Kıbrıs Otelleri</div>
-          <div class="card-desc">Kıbrıs'ın en güzel otellerinde tatil ve eğlence bir arada.</div>
+        <div class="hero-slider">
+            <div class="slide active">
+                <img src="images/cappadocia.jpg" alt="Kapadokya" loading="eager" fetchpriority="high">
+            </div>
+            <div class="slide">
+                <img src="images/pamukkale.jpg" alt="Pamukkale" loading="eager" fetchpriority="high">
+            </div>
+            <div class="slide">
+                <img src="images/istanbul.jpg" alt="Istanbul" loading="eager" fetchpriority="high">
+            </div>
         </div>
-        <button>İncele</button>
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=700&q=80" alt="Erken Rezervasyon">
-      <div class="card-body">
-        <div>
-          <div class="card-title">Erken Rezervasyon</div>
-          <div class="card-desc">%50'ye varan indirimlerle tatilini avantajlı fiyatlarla planla!</div>
+    </section>
+
+    <!-- Featured Destinations -->
+    <section class="featured-destinations">
+        <div class="container">
+            <h2 class="section-title" data-tr="Öne Çıkan Destinasyonlar" data-en="Featured Destinations">
+                Öne Çıkan Destinasyonlar
+            </h2>
+            <div class="destinations-grid">
+                <div class="destination-card">
+                    <img src="images/cappadocia-thumb.jpg" alt="Kapadokya">
+                    <div class="card-content">
+                        <h3 data-tr="Kapadokya" data-en="Cappadocia">Kapadokya</h3>
+                        <p data-tr="Peri bacaları ve sıcak hava balonları" data-en="Fairy chimneys and hot air balloons">
+                            Peri bacaları ve sıcak hava balonları
+                        </p>
+                        <span class="price">₺ $ £</span>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <img src="images/pamukkale-thumb.jpg" alt="Pamukkale">
+                    <div class="card-content">
+                        <h3 data-tr="Pamukkale" data-en="Pamukkale">Pamukkale</h3>
+                        <p data-tr="Beyaz travertenler ve antik şehir" data-en="White travertines and ancient city">
+                            Beyaz travertenler ve antik şehir
+                        </p>
+                        <span class="price">₺ $ £</span>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <img src="images/antalya-thumb.jpg" alt="Antalya">
+                    <div class="card-content">
+                        <h3 data-tr="Antalya" data-en="Antalya">Antalya</h3>
+                        <p data-tr="Muhteşem plajlar ve tarih" data-en="Beautiful beaches and history">
+                            Muhteşem plajlar ve tarih
+                        </p>
+                        <span class="price">₺ $ £</span>
+                          </div>
+                </div>
+                <div class="destination-card">
+                    <img src="images/ayvalik.jpg" alt="Ayvalık">
+                    <div class="card-content">
+                        <h3 data-tr="Ayvalık" data-en="Ayvalik">Ayvalık</h3>
+                        <p data-tr="Cunda Adası ve zeytinyağı turlarıyla Ege’nin incisi." data-en="The pearl of the Aegean with its Cunda Island and olive oil tours.">
+                            Cunda Adası ve zeytinyağı turlarıyla Ege’nin incisi.
+                        </p>
+                        <span class="price">₺ $ £</span>
+                          </div>
+                </div>
+                <div class="destination-card">
+                    <img src="images/bozcaada.jpg" alt="Bozcaada">
+                    <div class="card-content">
+                        <h3 data-tr="Bozcaada" data-en="Bozcaada">Bozcaada</h3>
+                        <p data-tr="Şarap bağları ve huzurlu tatil için ideal bir ada." data-en="An ideal island for wine vineyards and peaceful holidays.">
+                            Şarap bağları ve huzurlu tatil için ideal bir ada.
+                        </p>
+                        <span class="price">₺ $ £</span>
+                        </div>
+                    </div>
+                <div class="destination-card">
+                    <img src="images/amasra.jpg" alt="Amasra">
+                    <div class="card-content">
+                        <h3 data-tr="Amasra" data-en="Amasra">Amasra</h3>
+                        <p data-tr="Karadeniz’in incisi, balık restoranları ve doğal güzellikleriyle ünlü." data-en="The pearl of the Black Sea, famous for its fish restaurants and natural beauties.">
+                            Karadeniz’in incisi, balık restoranları ve doğal güzellikleriyle ünlü.
+                        </p>
+                        <span class="price">₺ $ £</span>
+                         </div>
+                </div>
+                <div class="destination-card">
+                    <img src="images/gobeklitepe.jpg" alt="Abant">
+                    <div class="card-content">
+                        <h3 data-tr="Göbeklitepe" data-en="Gobeklitepe">Göbeklitepe</h3>
+                        <p data-tr="Dünyanın en eski tapınağı ve arkeoloji meraklıları için eşsiz bir rota." data-en="The oldest temple in the world and a unique route for archaeology enthusiasts.">
+                            Dünyanın en eski tapınağı ve arkeoloji meraklıları için eşsiz bir rota.
+                        </p>
+                        <span class="price">₺ $ £</span>
+                    </div>
+                </div>
+                 <div class="destination-card">
+                    <img src= "images/fethiye.jpg" alt="Fethiye">
+                    <div class="card-content">
+                        <h3 data-tr="Fethiye" data-en="Fethiye">Fethiye</h3>
+                        <p data-tr="Ölüdeniz ve yamaç paraşütüyle eşsiz bir Akdeniz deneyimi." data-en="A unique Mediterranean experience with Ölüdeniz and paragliding.">
+                            Ölüdeniz ve yamaç paraşütüyle eşsiz bir Akdeniz deneyimi.
+                            </p>
+                        <span class="price">₺ $ £</span>
+                         </div>
+                </div>
+                <div class="destination-card">
+                    <img src="images/mardin.jpg" alt="Mardin">
+                    <div class="card-content">
+                        <h3 data-tr="Mardin" data-en="Mardin">Mardin</h3>
+                        <p data-tr="Taş evleri ve Mezopotamya manzarasıyla kültür turizminin gözdesi." data-en="It is a favorite of cultural tourism with its stone houses and Mesopotamian landscape.">
+                            Taş evleri ve Mezopotamya manzarasıyla kültür turizminin gözdesi.
+                        </p>
+                        <span class="price">₺ $ £</span>
+                          </div>
+                </div>
+                <div class="destination-card">
+                    <img src="images/kas.jpg" alt="Kaş">
+                    <div class="card-content">
+                        <h3 data-tr="Kaş" data-en="Kas">Kaş</h3>
+                        <p data-tr="Dalış, antik şehirler ve berrak plajlarıyla Akdeniz’in saklı cenneti." data-en="The hidden paradise of the Mediterranean with diving, ancient cities and crystal clear beaches.">
+                            Dalış, antik şehirler ve berrak plajlarıyla Akdeniz’in saklı cenneti.
+                        </p>
+                        <span class="price">₺ $ £</span>
+                         </div>
+                </div>
+                <div class="destination-card">
+                    <img src="images/safranbolu.jpg" alt="Safranbolu">
+                    <div class="card-content">
+                        <h3 data-tr="Safranbolu" data-en="Safranbolu">Safranbolu</h3>
+                        <p data-tr="Tarihi Osmanlı evleri ve UNESCO Dünya Mirası ilçesi." data-en="Historic Ottoman houses and UNESCO World Heritage district.">
+                            Tarihi Osmanlı evleri ve UNESCO Dünya Mirası ilçesi.
+                        </p>
+                        <span class="price">₺ $ £</span>
+                         </div>
+                </div>
+                <div class="destination-card">
+                    <img src="images/abant.jpg" alt="Abant">
+                    <div class="card-content">
+                        <h3 data-tr="Abant" data-en="Abant">Abant</h3>
+                        <p data-tr="Gölü ve doğa yürüyüşleriyle dört mevsim keyifli bir kaçamak." data-en="A pleasant getaway in all four seasons with its lake and nature walks.">
+                            Gölü ve doğa yürüyüşleriyle dört mevsim keyifli bir kaçamak.
+                        </p>
+                        <span class="price">₺ $ £</span>
+                        
         </div>
-        <button>İncele</button>
-      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="section-title" data-tr="Hakkımızda" data-en="About Us">Hakkımızda</h2>
+                    <p data-tr="Alnilam Turizm olarak, 15 yılı aşkın deneyimimizle Türkiye'nin en güzel yerlerini sizlere tanıtıyoruz. Profesyonel rehber kadromuz ve kaliteli hizmet anlayışımızla, unutulmaz anılar yaşamanızı sağlıyoruz." data-en="As Alnilam Tourism, with our experience of over 15 years, we introduce you to the most beautiful places in Turkey. With our professional guide staff and quality service approach, we ensure you have unforgettable memories.">
+                        Alnilam Turizm olarak, 15 yılı aşkın deneyimimizle Türkiye'nin en güzel yerlerini sizlere tanıtıyoruz. Profesyonel rehber kadromuz ve kaliteli hizmet anlayışımızla, unutulmaz anılar yaşamanızı sağlıyoruz.
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <h3>50,000+</h3>
+                            <p data-tr="Mutlu Müşteri" data-en="Happy Customers">Mutlu Müşteri</p>
+                        </div>
+                        <div class="stat">
+                            <h3>150+</h3>
+                            <p data-tr="Tur Rotası" data-en="Tour Routes">Tur Rotası</p>
+                        </div>
+                        <div class="stat">
+                            <h3>15+</h3>
+                            <p data-tr="Yıl Deneyim" data-en="Years Experience">Yıl Deneyim</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="images/about-us.jpg" alt="Hakkımızda">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section id="destinations" class="destinations">
+        <div class="container">
+            <h2 class="section-title" data-tr="Tüm Destinasyonlar" data-en="All Destinations">Tüm Destinasyonlar</h2>
+            <div class="destinations-gallery">
+                <div class="gallery-item" data-category="cultural">
+                    <img src="images/gallery/istanbul.jpg" alt="İstanbul" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 data-tr="İstanbul" data-en="Istanbul">İstanbul</h3>
+                        <p data-tr="Kültürel Tur" data-en="Cultural Tour">Kültürel Tur</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="nature">
+                    <img src="images/gallery/cappadocia.jpg" alt="Kapadokya" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 data-tr="Kapadokya" data-en="Cappadocia">Kapadokya</h3>
+                        <p data-tr="Doğa Turu" data-en="Nature Tour">Doğa Turu</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="beach">
+                    <img src="images/gallery/bodrum.jpg" alt="Bodrum" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 data-tr="Bodrum" data-en="Bodrum">Bodrum</h3>
+                        <p data-tr="Plaj Turu" data-en="Beach Tour">Plaj Turu</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="adventure">
+                    <img src="images/gallery/olympos.jpg" alt="Olympos" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 data-tr="Olympos" data-en="Olympos">Olympos</h3>
+                        <p data-tr="Macera Turu" data-en="Adventure Tour">Macera Turu</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title" data-tr="Hizmetlerimiz" data-en="Our Services">Hizmetlerimiz</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-bus"></i>
+                    </div>
+                    <h3 data-tr="Otobüs Turları" data-en="Bus Tours">Otobüs Turları</h3>
+                    <p data-tr="Konforlu otobüslerle grup turları" data-en="Group tours with comfortable buses">
+                        Konforlu otobüslerle grup turları
+                    </p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <h3 data-tr="Havayolu Turları" data-en="Flight Tours">Havayolu Turları</h3>
+                    <p data-tr="Hızlı ve konforlu havayolu paketleri" data-en="Fast and comfortable airline packages">
+                        Hızlı ve konforlu havayolu paketleri
+                    </p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-hotel"></i>
+                    </div>
+                    <h3 data-tr="Otel Rezervasyonu" data-en="Hotel Reservation">Otel Rezervasyonu</h3>
+                    <p data-tr="En iyi otellerde konaklama" data-en="Accommodation in the best hotels">
+                        En iyi otellerde konaklama
+                    </p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3 data-tr="Rehberlik Hizmeti" data-en="Guide Service">Rehberlik Hizmeti</h3>
+                    <p data-tr="Profesyonel tur rehberleri" data-en="Professional tour guides">
+                        Profesyonel tur rehberleri
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title" data-tr="İletişim" data-en="Contact">İletişim</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3 data-tr="Bizimle İletişime Geçin" data-en="Get In Touch">Bizimle İletişime Geçin</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4 data-tr="Adres" data-en="Address">Adres</h4>
+                            <p data-tr="Veysel Karani mahallesi çolakoğlu sok no 10 Rings Rezidans kat 6 Daire 99 Sancaktepe/İstanbul" data-en="Veysel Karani neighborhood, Çolakoğlu street no 10, Rings Residence floor 6, Apt 99, Sancaktepe/Istanbul">Veysel Karani mahallesi çolakoğlu sok no 10 Rings Rezidans kat 6 Daire 99 Sancaktepe/İstanbul</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4 data-tr="Telefon" data-en="Phone">Telefon</h4>
+                            <p>+90 216 999 03 69</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>info@alnilamturizm.com</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/people/Alnilam-Turizm/61577130877303/" target="_blank" class="social-link">
+  <i class="fab fa-facebook"></i>
+</a>
+                        <a href="https://www.instagram.com/alnilamturizm/" target="_blank" class="social-link">
+  <i class="fab fa-instagram"></i>
+</a>
+                        <a href="https://x.com/AlnilamTurizm" target="_blank" class="social-link">
+  <i class="fab fa-twitter"></i>
+</a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" required>
+                        <label for="name" data-tr="Adınız Soyadınız" data-en="Your Name">Adınız Soyadınız</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" required>
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="phone" name="phone" required>
+                        <label for="phone" data-tr="Telefon" data-en="Phone">Telefon</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" required></textarea>
+                        <label for="message" data-tr="Mesajınız" data-en="Your Message">Mesajınız</label>
+                    </div>
+                    <button type="submit" class="submit-btn" data-tr="Gönder" data-en="Send">Gönder</button>
+                    <div class="form-message" id="formMessage"></div>
+                </form>
+            </div>
+
+            <!-- Google Maps -->
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3008.3!2d29.2675!3d40.9897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cac82b4d4f4f25%3A0x8b4e8b7e8b4e8b4e!2sVeysel%20Karani%2C%20Sancaktepe%2F%C4%B0stanbul%2C%20Turkey!5e0!3m2!1sen!2str!4v1"
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="blog">
+        <div class="container">
+            <h2 class="section-title" data-tr="Blog & Haberler" data-en="Blog & News">Blog & Haberler</h2>
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <img src="images/blog/blog1.jpg" alt="Blog 1">
+                    <div class="blog-content">
+                        <span class="blog-date">15 Mart 2024</span>
+                        <h3 data-tr="Kapadokya'da Yapılması Gerekenler" data-en="Things to Do in Cappadocia">
+                            Kapadokya'da Yapılması Gerekenler
+                        </h3>
+                        <p data-tr="Kapadokya'nın büyüleyici manzaralarını keşfetmek için en iyi ipuçları..." data-en="Best tips for discovering the enchanting landscapes of Cappadocia...">
+                            Kapadokya'nın büyüleyici manzaralarını keşfetmek için en iyi ipuçları...
+                        </p>
+                        <a href="blog.html" class="read-more" data-tr="Devamını Oku" data-en="Read More">Devamını Oku</a>
+                    </div>
+                </article>
+                <article class="blog-card">
+                    <img src="images/blog/blog2.jpg" alt="Blog 2">
+                    <div class="blog-content">
+                        <span class="blog-date">10 Mart 2024</span>
+                        <h3 data-tr="Türkiye'nin Gizli Cennetleri" data-en="Hidden Paradises of Turkey">
+                            Türkiye'nin Gizli Cennetleri
+                        </h3>
+                        <p data-tr="Henüz keşfedilmemiş muhteşem yerler ve nasıl ulaşacağınız..." data-en="Magnificent undiscovered places and how to reach them...">
+                            Henüz keşfedilmemiş muhteşem yerler ve nasıl ulaşacağınız...
+                        </p>
+                        <a href="blog.html" class="read-more" data-tr="Devamını Oku" data-en="Read More">Devamını Oku</a>
+                    </div>
+                </article>
+                <article class="blog-card">
+                    <img src="images/blog/blog3.jpg" alt="Blog 3">
+                    <div class="blog-content">
+                        <span class="blog-date">5 Mart 2024</span>
+                        <h3 data-tr="Seyahat İpuçları ve Öneriler" data-en="Travel Tips and Recommendations">
+                            Seyahat İpuçları ve Öneriler
+                        </h3>
+                        <p data-tr="Unutulmaz bir tatil için pratik seyahat tavsiyeleri..." data-en="Practical travel advice for an unforgettable vacation...">
+                            Unutulmaz bir tatil için pratik seyahat tavsiyeleri...
+                        </p>
+                        <a href="blog.html" class="read-more" data-tr="Devamını Oku" data-en="Read More">Devamını Oku</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="images/logo.svg" alt="Alnilam Turizm">
+                        <span>ALNILAM TURİZM</span>
+                    </div>
+                    <p data-tr="Türkiye'nin en güzel yerlerini keşfetmeniz için buradayız. Kaliteli hizmet ve unutulmaz deneyimler." data-en="We are here to help you discover the most beautiful places in Turkey. Quality service and unforgettable experiences.">
+                        Türkiye'nin en güzel yerlerini keşfetmeniz için buradayız. Kaliteli hizmet ve unutulmaz deneyimler.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4 data-tr="Hızlı Linkler" data-en="Quick Links">Hızlı Linkler</h4>
+                    <ul>
+                        <li><a href="#home" data-tr="Ana Sayfa" data-en="Home">Ana Sayfa</a></li>
+                        <li><a href="#about" data-tr="Hakkımızda" data-en="About">Hakkımızda</a></li>
+                        <li><a href="#destinations" data-tr="Destinasyonlar" data-en="Destinations">Destinasyonlar</a></li>
+                        <li><a href="#contact" data-tr="İletişim" data-en="Contact">İletişim</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-tr="İletişim Bilgileri" data-en="Contact Info">İletişim Bilgileri</h4>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span data-tr="Veysel Karani mah. Çolakoğlu sok no 10, Sancaktepe/İstanbul" data-en="Veysel Karani neighborhood, Çolakoğlu st. no 10, Sancaktepe/Istanbul">Veysel Karani mah. Çolakoğlu sok no 10, Sancaktepe/İstanbul</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+90 216 999 03 69</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@alnilamturizm.com</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Alnilam Turizm. <span data-tr="Tüm hakları saklıdır." data-en="All rights reserved.">Tüm hakları saklıdır.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
     </div>
-  </section>
-  <div class="contact-bar">
-    <span>0850 000 00 00 | info@alnilamturizm.com | 7/24 Canlı Destek</span>
-  </div>
-  <footer>
-    &copy; 2025 Alnilam Turizm. Tüm hakları saklıdır.
-  </footer>
+
+    <script src="script.js"></script>
 </body>
-</html>
+</html> 
